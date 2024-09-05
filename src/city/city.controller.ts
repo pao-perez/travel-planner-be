@@ -1,10 +1,15 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { CityService } from './city.service';
 import { CityDTO } from './dtos/city.dto';
+import { WeatherService } from 'src/weather/weather.service';
+import { WeatherDTO } from 'src/weather/dtos/weather.dto';
 
 @Controller('cities')
 export class CityController {
-  constructor(private readonly cityService: CityService) {}
+  constructor(
+    private readonly cityService: CityService,
+    private readonly weatherService: WeatherService,
+  ) {}
 
   @Get()
   getAllCities(): CityDTO[] {
@@ -18,13 +23,21 @@ export class CityController {
   }
 
   @Get(':name')
-  getCityByName(@Param('name') name: string): CityDTO {
-    const city = this.cityService.getCityByName(name);
+  async getCityByName(
+    @Param('name') name: string,
+  ): Promise<CityDTO & WeatherDTO> {
+    const {
+      name: cityName,
+      label,
+      description,
+    } = this.cityService.getCityByName(name);
+    const weather = await this.weatherService.getCurrentWeather(name);
 
     return {
-      name: city.name,
-      label: city.label,
-      description: city.description,
+      name: cityName,
+      label,
+      description,
+      ...weather,
     };
   }
 }
