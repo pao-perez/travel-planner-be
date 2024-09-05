@@ -1,85 +1,204 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Travel Planner API Documentation
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Overview
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This API is part of the Travel Planner application and is built using the NestJS framework. It provides essential features like retrieving information about cities and fetching real-time weather data based on city names. This document covers how to interact with the API, set it up, and run it locally, along with key information about its structure and endpoints.
 
-## Description
+### Demo
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Hosted Demo:** [Travel Planner Backend](https://travel-planner-be-80b3f4e26651.herokuapp.com/cities)
 
-## Project setup
+## Setup and Installation
 
-```bash
-$ npm install
+### Prerequisites
+
+Ensure you have the following installed:
+
+- Node.js (v14+)
+- npm (v6+)
+- [NestJS CLI](https://docs.nestjs.com/cli/overview)
+
+### Installation
+
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Run the following command to install the required dependencies:
+   ```bash
+   npm install
+   ```
+
+### Environment Variables
+
+The environment variables in `.env.*` files need to be replaced for the APIs to work:
+
+```env
+CLIENT_URI=your_hosting_uri or localhost
+WEATHER_API_KEY=your_weather_api_key
 ```
 
-## Compile and run the project
+- Replace `your_weather_api_key` with your actual API key from WeatherAPI.
+
+### Scripts
+
+Here are the available npm scripts defined in `package.json`:
+
+- **Build**: Compiles the TypeScript code.
+  ```bash
+  npm run build
+  ```
+- **Start (Production)**: Starts the production server.
+  ```bash
+  npm run start
+  ```
+- **Start (Development)**: Starts the development server with live reloading.
+  ```bash
+  npm run start:dev
+  ```
+- **Test**: Run unit tests using Jest.
+  ```bash
+  npm run test
+  ```
+  - **Test**: Run end to end tests using Jest.
+  ```bash
+  npm run test:e2e
+  ```
+- **Test with Coverage**: Run unit tests and get a coverage report.
+  ```bash
+  npm run test:cov
+  ```
+
+### Running the Application
+
+To run the application in development mode:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run start:dev
 ```
 
-## Run tests
+To run the application in production mode:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start
 ```
 
-## Resources
+## API Endpoints
 
-Check out a few resources that may come in handy when working with NestJS:
+### Cities
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+#### `GET /cities`
 
-## Support
+Fetches a list of all available cities.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- **Response**:
+  ```json
+  [
+    {
+    "name": "france-paris",
+    "label": "Paris"
+    },
+    {
+    "name": "japan-tokyo",
+    "label": "Tokyo"
+    },
+    ...
+  ]
+  ```
 
-## Stay in touch
+#### `GET /cities/:name`
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Fetches detailed information about a specific city, including its description.
 
-## License
+- **Request Parameters**:
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+  - `name`: A unique identified in the format of `${country}-${city}` (e.g., `france-paris`).
+
+- **Response**:
+  ```json
+  {
+    "name": "france-paris",
+    "label": "Paris",
+    "description": "Paris, France's capital, is a major European city and a global center for art, fashion, gastronomy, and culture."
+  }
+  ```
+
+### Weather
+
+#### `GET /weather/:name`
+
+Fetches the current weather information for a given city by name.
+
+- **Request Parameters**:
+
+  - `name`: A unique identified in the format of `${country}-${city}` (e.g., `unitedkingdom-london`).
+
+- **Response**:
+  ```json
+  {
+    "location": {
+      "name": "London",
+      "region": "City of London, Greater London",
+      "country": "United Kingdom",
+      "lat": 51.52,
+      "lon": -0.11,
+      "tz_id": "Europe/London",
+      "localtime_epoch": 1725519870,
+      "localtime": "2024-09-05 08:04"
+    },
+    "current": {
+      "last_updated_epoch": 1725519600,
+      "last_updated": "2024-09-05 08:00",
+      "temp_c": 14.1,
+      "temp_f": 57.4,
+      "is_day": 1,
+      "condition": {
+        "text": "Moderate rain",
+        "icon": "//cdn.weatherapi.com/weather/64x64/day/302.png",
+        "code": 1189
+      }
+    }
+  }
+  ```
+
+## Project Structure
+
+The project is structured as follows:
+
+```
+src/
+│
+├── city/
+│   ├── city.controller.ts    # Controller for handling city-related endpoints
+│   ├── city.service.ts       # Service to manage city data
+│   ├── dtos/
+│   │   └── city.dto.ts       # DTO (Data Transfer Object) for cities
+│
+├── weather/
+│   ├── weather.controller.ts # Controller for handling weather-related endpoints
+│   ├── weather.service.ts    # Service to fetch weather data from external API
+│   ├── dtos/
+│   │   └── weather.dto.ts    # DTO for weather data
+│
+├── app.module.ts             # Main module where all modules are imported
+└── main.ts                   # Application entry point
+```
+
+## Testing
+
+The project includes tests written using Jest.
+
+- To run tests:
+  ```bash
+  npm run test
+  ```
+- To run end to end tests:
+  ```bash
+  npm run test:e2e
+  ```
+
+## Dependencies
+
+Here is a list of key dependencies used in the project:
+
+- **NestJS**: The core framework for building the server.
+- **Axios**: For making HTTP requests to external APIs.
+- **Jest**: For running tests.
