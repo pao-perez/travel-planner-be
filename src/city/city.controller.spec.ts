@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CityController } from './city.controller';
 import { CityService } from './city.service';
 import { CityDTO } from './dtos/city.dto';
+import { City } from './entities/city.entity';
 
 describe('CityController', () => {
   let cityController: CityController;
@@ -26,7 +27,7 @@ describe('CityController', () => {
   });
 
   it('should return all cities', () => {
-    const mockCities: CityDTO[] = [
+    const mockCities: City[] = [
       {
         name: 'france-paris',
         label: 'Paris',
@@ -37,8 +38,19 @@ describe('CityController', () => {
 
     jest.spyOn(cityService, 'getAllCities').mockReturnValue(mockCities);
 
+    const mockCitiesDTOs: Omit<CityDTO, 'description'>[] = [
+      {
+        name: 'france-paris',
+        label: 'Paris',
+      },
+      {
+        name: 'italy-rome',
+        label: 'Rome',
+      },
+    ];
+
     const result = cityController.getAllCities();
-    expect(result).toEqual(mockCities);
+    expect(result).toEqual(mockCitiesDTOs);
   });
 
   it('should return city by name', async () => {
