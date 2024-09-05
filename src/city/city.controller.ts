@@ -7,13 +7,12 @@ export class CityController {
   constructor(private readonly cityService: CityService) {}
 
   @Get()
-  getAllCities(): CityDTO[] {
+  getAllCities(): Omit<CityDTO, 'description'>[] {
     const cities = this.cityService.getAllCities();
 
     return cities.map((city) => ({
       name: city.name,
       label: city.label,
-      description: city.description,
     }));
   }
 
