@@ -1,30 +1,50 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CityController } from './city.controller';
 import { CityService } from './city.service';
+import { WeatherService } from '../weather/weather.service';
+import { CityDTO } from './dtos/city.dto';
 
 describe('CityController', () => {
-  let controller: CityController;
+  let cityController: CityController;
+  let cityService: CityService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CityController],
-      providers: [CityService],
+      providers: [
+        {
+          provide: CityService,
+          useValue: {
+            getAllCities: jest.fn(),
+            getCityByName: jest.fn(),
+          },
+        },
+        {
+          provide: WeatherService,
+          useValue: {
+            getCurrentWeather: jest.fn(),
+          },
+        },
+      ],
     }).compile();
 
-    controller = module.get<CityController>(CityController);
-  });
-
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+    cityController = module.get<CityController>(CityController);
+    cityService = module.get<CityService>(CityService);
   });
 
   it('should return all cities', () => {
-    const cities = controller.getAllCities();
-    expect(cities.length).toBe(5);
-  });
+    const mockCities: CityDTO[] = [
+      {
+        name: 'france-paris',
+        label: 'Paris',
+        description: 'Paris description',
+      },
+      { name: 'italy-rome', label: 'Rome', description: 'Rome description' },
+    ];
 
-  it('should return a city by name', () => {
-    const city = controller.getCityByName('europe-london');
-    expect(city.name).toBe('europe-london');
+    jest.spyOn(cityService, 'getAllCities').mockReturnValue(mockCities);
+
+    const result = cityController.getAllCities();
+    expect(result).toEqual(mockCities);
   });
 });

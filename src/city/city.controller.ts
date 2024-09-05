@@ -1,8 +1,8 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { CityService } from './city.service';
 import { CityDTO } from './dtos/city.dto';
-import { WeatherService } from 'src/weather/weather.service';
-import { WeatherDTO } from 'src/weather/dtos/weather.dto';
+import { WeatherService } from '../weather/weather.service';
+import { WeatherDTO } from '../weather/dtos/weather.dto';
 
 @Controller('cities')
 export class CityController {
