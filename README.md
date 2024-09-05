@@ -121,6 +121,41 @@ Fetches detailed information about a specific city, including its description.
   }
   ```
 
+#### `POST /cities`
+
+Creates a new city.
+
+- **Request Parameters**:
+  `{ "name": "france-paris", "label": "Paris", "description": "Paris, France's capital, is a major European city and a global center for art, fashion, gastronomy, and culture." } `
+
+- **Response**:
+  `{ "name": "france-paris", "label": "Paris", "description": "Paris, France's capital, is a major European city and a global center for art, fashion, gastronomy, and culture." } `
+
+Errors:
+
+`400 Bad Request`: If the input validation fails.
+`500 Internal Server Error`: If the city with the same name already exists.
+
+#### `PUT /cities/`
+
+Updates a city's information based on its name.
+
+- **Request Parameters**:
+  `name`: A unique identifier in the format `${country}-${city}` (e.g., `france-paris`).
+  `{ "label": "New Paris", "description": "Updated description of Paris." } `
+
+- **Response**:
+  `{
+    "name": "france-paris",
+    "label": "New Paris",
+    "description": "Updated description of Paris."
+    }`
+
+Errors:
+
+`404 Not Found`: If the city with the given name does not exist.
+`400 Bad Request`: If the input validation fails.
+
 ### Weather
 
 #### `GET /weather/:name`
@@ -158,6 +193,8 @@ Fetches the current weather information for a given city by name.
     }
   }
   ```
+
+````
 
 ## Project Structure
 
@@ -202,3 +239,4 @@ Here is a list of key dependencies used in the project:
 - **NestJS**: The core framework for building the server.
 - **Axios**: For making HTTP requests to external APIs.
 - **Jest**: For running tests.
+````
