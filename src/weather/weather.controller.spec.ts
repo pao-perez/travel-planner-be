@@ -55,12 +55,12 @@ describe('WeatherController', () => {
       .mockResolvedValue(mockWeather);
 
     const result =
-      await weatherController.getWeatherByCityName('europe-london');
+      await weatherController.getWeatherByCityName('unitedkingdom-london');
     expect(result).toEqual(mockWeather);
 
     expect(weatherService.getCurrentWeather).toHaveBeenCalled();
     expect(weatherService.getCurrentWeather).toHaveBeenCalledWith(
-      'europe-london',
+      'unitedkingdom-london',
     );
   });
 });

@@ -26,16 +26,16 @@ describe('AppController (e2e)', () => {
 
   it('/cities/:name (GET)', () => {
     return request(app.getHttpServer())
-      .get('/cities/europe-london')
+      .get('/cities/unitedkingdom-london')
       .expect(200)
       .expect((res) => {
-        expect(res.body.name).toBe('europe-london');
+        expect(res.body.name).toBe('unitedkingdom-london');
       });
   });
 
   it('/weather/:name (GET)', () => {
     return request(app.getHttpServer())
-      .get('/weather/europe-london')
+      .get('/weather/unitedkingdom-london')
       .expect(200)
       .expect((res) => {
         expect(res.body.location.name).toBe('London');

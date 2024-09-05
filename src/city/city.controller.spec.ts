@@ -55,21 +55,21 @@ describe('CityController', () => {
 
   it('should return city by name', async () => {
     const mockCity: CityDTO = {
-      name: 'europe-london',
+      name: 'unitedkingdom-london',
       label: 'London',
       description: 'London description',
     };
 
     jest.spyOn(cityService, 'getCityByName').mockReturnValue(mockCity);
 
-    const result = await cityController.getCityByName('europe-london');
+    const result = await cityController.getCityByName('unitedkingdom-london');
     expect(result).toEqual({
-      name: 'europe-london',
+      name: 'unitedkingdom-london',
       label: 'London',
       description: 'London description',
     });
 
     expect(cityService.getCityByName).toHaveBeenCalled();
-    expect(cityService.getCityByName).toHaveBeenCalledWith('europe-london');
+    expect(cityService.getCityByName).toHaveBeenCalledWith('unitedkingdom-london');
   });
 });

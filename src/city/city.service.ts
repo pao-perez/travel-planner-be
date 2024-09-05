@@ -11,7 +11,7 @@ export class CityService {
         'Paris is the capital city of France, known for its art, culture, and fashion.',
     },
     {
-      name: 'europe-london',
+      name: 'unitedkingdom-london',
       label: 'London',
       description:
         'London is the capital of the UK, famous for its history, architecture, and the River Thames.',
