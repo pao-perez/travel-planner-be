@@ -21,4 +21,22 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello World!');
   });
+
+  it('/cities (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/cities')
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.length).toBe(5);
+      });
+  });
+
+  it('/cities/:name (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/cities/Europe-London')
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.name).toBe('Europe-London');
+      });
+  });
 });
