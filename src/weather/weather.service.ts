@@ -18,7 +18,7 @@ export class WeatherService {
   }
 
   async getCurrentWeather(cityName: string): Promise<WeatherDTO> {
-    const url = `${this.weatherApiUrl}/current.json?key=${this.apiKey}&q=${cityName}`;
+    const url = `${this.weatherApiUrl}/current.json?key=${this.apiKey}&q=${cityName.split('-')[1]}`;
 
     try {
       const response: AxiosResponse = await this.httpService.axiosRef.get(url);
