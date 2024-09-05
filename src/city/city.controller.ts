@@ -7,11 +7,11 @@ export class CityController {
 
   @Get()
   getAllCities() {
-    return this.cityService.findAll();
+    return this.cityService.getAllCities();
   }
 
   @Get(':name')
   getCityByName(@Param('name') name: string) {
-    return this.cityService.findByName(name);
+    return this.cityService.getCityByName(name);
   }
 }

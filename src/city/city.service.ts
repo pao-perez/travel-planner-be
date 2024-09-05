@@ -36,11 +36,11 @@ export class CityService {
     },
   ];
 
-  findAll(): City[] {
+  getAllCities(): City[] {
     return this.cities;
   }
 
-  findByName(name: string): City {
+  getCityByName(name: string): City {
     return this.cities.find((city) => city.name === name);
   }
 }
