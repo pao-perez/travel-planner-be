@@ -22,7 +22,7 @@ describe('CityService', () => {
   });
 
   it('should return a city by name', () => {
-    const city = service.getCityByName('Europe-London');
-    expect(city.name).toBe('Europe-London');
+    const city = service.getCityByName('europe-london');
+    expect(city.name).toBe('europe-london');
   });
 });

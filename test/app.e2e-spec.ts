@@ -26,10 +26,10 @@ describe('AppController (e2e)', () => {
 
   it('/cities/:name (GET)', () => {
     return request(app.getHttpServer())
-      .get('/cities/Europe-London')
+      .get('/cities/europe-london')
       .expect(200)
       .expect((res) => {
-        expect(res.body.name).toBe('Europe-London');
+        expect(res.body.name).toBe('europe-london');
       });
   });
 });

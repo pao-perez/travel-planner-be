@@ -24,7 +24,7 @@ describe('CityController', () => {
   });
 
   it('should return a city by name', () => {
-    const city = controller.getCityByName('Europe-London');
-    expect(city.name).toBe('Europe-London');
+    const city = controller.getCityByName('europe-london');
+    expect(city.name).toBe('europe-london');
   });
 });

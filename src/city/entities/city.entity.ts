@@ -1,5 +1,5 @@
 export interface City {
-  name: string; // ${Country}-${City}
+  name: string; // ${country}-${city}
   label: string;
   description: string;
 }
