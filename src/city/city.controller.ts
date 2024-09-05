@@ -1,4 +1,15 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Put,
+  Delete,
+  NotFoundException,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { CityService } from './city.service';
 import { CityDTO } from './dtos/city.dto';
 
@@ -18,13 +29,51 @@ export class CityController {
 
   @Get(':name')
   async getCityByName(@Param('name') cityName: string): Promise<CityDTO> {
-    const { name, label, description } =
-      this.cityService.getCityByName(cityName);
+    const city = this.cityService.getCityByName(cityName);
+    if (!city) {
+      throw new NotFoundException(`City with name ${cityName} not found`);
+    }
 
-    return {
-      name,
-      label,
-      description,
-    };
+    return { ...city };
+  }
+
+  @Post()
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async createCity(@Body() cityDto: CityDTO): Promise<CityDTO> {
+    const city = this.cityService.createCity({ ...cityDto });
+
+    if (!city) {
+      throw new Error(`City with name ${cityDto.name} already exists`);
+    }
+
+    return city;
+  }
+
+  @Put(':name')
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async updateCityByName(
+    @Param('name') cityName: string,
+    @Body() updateCityDto: Partial<CityDTO>,
+  ): Promise<CityDTO> {
+    const city = this.cityService.updateCityByName(cityName, {
+      ...updateCityDto,
+    });
+    if (!city) {
+      throw new NotFoundException(`City with name ${cityName} not found`);
+    }
+
+    return city;
+  }
+
+  @Delete(':name')
+  async deleteCityByName(
+    @Param('name') cityName: string,
+  ): Promise<{ success: boolean }> {
+    const isDeleted = this.cityService.deleteCityByName(cityName);
+    if (!isDeleted) {
+      throw new NotFoundException(`City with name ${cityName} not found`);
+    }
+
+    return { success: isDeleted };
   }
 }

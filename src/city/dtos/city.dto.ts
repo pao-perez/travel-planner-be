@@ -1,5 +1,15 @@
+import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
+
 export class CityDTO {
-  name: string; // ${country}-${city}
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
+  @IsString()
+  @IsNotEmpty()
   label: string;
-  description: string;
+
+  @IsString()
+  @IsOptional() // Optional because in some cases we don't need this field (e.g., in the list)
+  description?: string;
 }

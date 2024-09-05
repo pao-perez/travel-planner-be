@@ -3,6 +3,7 @@ import { City } from './entities/city.entity';
 
 @Injectable()
 export class CityService {
+  // TODO: replace with DB
   private cities: City[] = [
     {
       name: 'france-paris',
@@ -42,5 +43,42 @@ export class CityService {
 
   getCityByName(name: string): City {
     return this.cities.find((city) => city.name === name);
+  }
+
+  createCity(city: City): City {
+    const cityExists = this.cities.some(
+      (existingCity) => existingCity.name === city.name,
+    );
+
+    if (!cityExists) {
+      this.cities.push(city);
+      return city;
+    }
+
+    return null;
+  }
+
+  updateCityByName(name: string, updateCity: Partial<City>): City {
+    const cityIndex = this.cities.findIndex((city) => city.name === name);
+
+    if (cityIndex === -1) {
+      return null;
+    }
+
+    const existingCity = this.cities[cityIndex];
+    this.cities[cityIndex] = { ...existingCity, ...updateCity };
+
+    return this.cities[cityIndex];
+  }
+
+  deleteCityByName(name: string): boolean {
+    const cityIndex = this.cities.findIndex((city) => city.name === name);
+
+    if (cityIndex === -1) {
+      return false;
+    }
+
+    this.cities.splice(cityIndex, 1);
+    return true;
   }
 }
