@@ -15,4 +15,14 @@ describe('CityService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it('should return all cities', () => {
+    const cities = service.getAllCities();
+    expect(cities.length).toBe(5);
+  });
+
+  it('should return a city by name', () => {
+    const city = service.getCityByName('Europe-London');
+    expect(city.name).toBe('Europe-London');
+  });
 });

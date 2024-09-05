@@ -17,4 +17,14 @@ describe('CityController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  it('should return all cities', () => {
+    const cities = controller.getAllCities();
+    expect(cities.length).toBe(5);
+  });
+
+  it('should return a city by name', () => {
+    const city = controller.getCityByName('Europe-London');
+    expect(city.name).toBe('Europe-London');
+  });
 });
