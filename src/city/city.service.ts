@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { City } from './city.entity';
+import { City } from './entities/city.entity';
 
 @Injectable()
 export class CityService {
