@@ -11,7 +11,7 @@ async function bootstrap() {
     methods: 'GET,POST,PUT,DELETE',
   });
 
-  const port = configService.get<number>('SERVER_PORT', 3000);
+  const port = process.env.PORT || 3000;
 
   await app.listen(port);
 }
