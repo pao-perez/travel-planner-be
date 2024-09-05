@@ -32,4 +32,13 @@ describe('AppController (e2e)', () => {
         expect(res.body.name).toBe('europe-london');
       });
   });
+
+  it('/weather/:name (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/weather/europe-london')
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.location.name).toBe('London');
+      });
+  });
 });

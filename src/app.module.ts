@@ -9,8 +9,8 @@ import { WeatherModule } from './weather/weather.module';
       isGlobal: true,
       envFilePath: [`.env.${process.env.NODE_ENV}`, '.env.local'],
     }),
-    CityModule,
     WeatherModule,
+    CityModule,
   ],
 })
 export class AppModule {}
